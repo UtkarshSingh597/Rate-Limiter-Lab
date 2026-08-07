@@ -51,39 +51,23 @@ This makes it possible to directly compare:
 # Architecture
 
 ```
-
 Client
-
-│
-
-▼
-
+  │
+  ▼
 RateLimiterController
-
-│
-
-▼
-
+  │
+  ▼
 RateLimiter Interface
-
 ┌────────────┼────────────┐
-│ │ │
-▼ ▼ ▼
-
-Manual Bucket4j Redis
-
-│ │ │
-
-▼ ▼ ▼
-
-ConcurrentMap Bucket4j Redis
-
-│ │ │
-
-▼ ▼ ▼
-
+│            │            │
+▼            ▼            ▼
+Manual       Bucket4j     Redis
+  │            │            │
+  ▼            ▼            ▼
+ConcurrentMap Bucket4j     Redis
+  │            │            │
+  ▼            ▼            ▼
 RateLimitResult
-
 ```
 
 ---
@@ -91,32 +75,29 @@ RateLimitResult
 # Repository Layout
 
 ```
-
 rate-limiter-lab/
-
 ├── controller/
-│ └── RateLimiterController.java
+│   └── RateLimiterController.java
 │
 ├── limiter/
-│ ├── RateLimiter.java
-│ ├── manual/
-│ │ └── TokenBucketLimiter.java
-│ ├── bucket4j/
-│ │ └── Bucket4jLimiter.java
-│ └── redis/
-│ └── RedisTokenBucketLimiter.java
+│   ├── RateLimiter.java
+│   ├── manual/
+│   │   └── TokenBucketLimiter.java
+│   ├── bucket4j/
+│   │   └── Bucket4jLimiter.java
+│   └── redis/
+│       └── RedisTokenBucketLimiter.java
 │
 ├── model/
-│ ├── TokenBucket.java
-│ └── RateLimitResult.java
+│   ├── TokenBucket.java
+│   └── RateLimitResult.java
 │
 ├── repository/
-│ ├── BucketStore.java
-│ ├── InMemoryBucketStore.java
-│ └── RedisBucketStore.java
+│   ├── BucketStore.java
+│   ├── InMemoryBucketStore.java
+│   └── RedisBucketStore.java
 │
 └── README.md
-
 ```
 
 ---

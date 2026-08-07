@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class RateLimiterResult {
+public class RateLimitResult {
 
     private boolean allowed;
 

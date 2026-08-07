@@ -1,7 +1,7 @@
 package com.utkarsh.ratelimiterlab.limiter.manual;
 
 import com.utkarsh.ratelimiterlab.limiter.RateLimiter;
-import com.utkarsh.ratelimiterlab.model.RateLimiterResult;
+import com.utkarsh.ratelimiterlab.model.RateLimitResult;
 import com.utkarsh.ratelimiterlab.model.TokenBucket;
 import com.utkarsh.ratelimiterlab.repository.BucketStore;
 import org.springframework.stereotype.Component;
@@ -13,12 +13,13 @@ public class TokenBucketLimiter implements RateLimiter {
 
     private final BucketStore bucketStore;
 
+
     public TokenBucketLimiter(BucketStore bucketStore) {
         this.bucketStore = bucketStore;
     }
 
     @Override
-    public RateLimiterResult allow(String clientId) {
+    public RateLimitResult allow(String clientId) {
         TokenBucket bucket = bucketStore.getBucket(clientId);
         boolean bucketCreated = false;
 
@@ -41,28 +42,27 @@ public class TokenBucketLimiter implements RateLimiter {
             bucket.setTokens(availableTokens);
             bucket.setLastRefillTime(updatedRefillTime);
         }
-
+        RateLimitResult result;
         if (bucket.getTokens() > 0) {
             int remainingTokens = bucket.getTokens() - 1;
             bucket.setTokens(remainingTokens);
-            bucketStore.save(clientId, bucket);
-            return new RateLimiterResult(
+            result = new RateLimitResult(
                     true,
                     remainingTokens,
                     "Request Allowed",
                     currentTime
             );
-        }
+        }else{
 
-        if (bucketCreated || bucketRefilled) {
-            bucketStore.save(clientId, bucket);
-        }
 
-        return new RateLimiterResult(
-                false,
-                0,
-                "Rate Limit Exceeded",
-                currentTime
-        );
+            result = new RateLimitResult(
+                    false,
+                    0,
+                    "Rate Limit Exceeded",
+                    currentTime
+            );
+        }
+        bucketStore.save(clientId,bucket);
+        return result;
     }
 }

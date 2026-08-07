@@ -1,7 +1,7 @@
 package com.utkarsh.ratelimiterlab.limiter;
 
-import com.utkarsh.ratelimiterlab.model.RateLimiterResult;
+import com.utkarsh.ratelimiterlab.model.RateLimitResult;
 
 public interface RateLimiter {
-    RateLimiterResult allow(String clientId);
+    RateLimitResult allow(String clientId);
 }

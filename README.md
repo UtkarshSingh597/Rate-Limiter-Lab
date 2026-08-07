@@ -157,17 +157,29 @@ Suitable for:
 # Request Flow
 
 ```
+
 HTTP Request
-    ↓
+
+↓
+
 Controller
-    ↓
+
+↓
+
 Selected Rate Limiter
-    ↓
+
+↓
+
 Check Tokens
-    ↓
+
+↓
+
 Allow / Reject
-    ↓
+
+↓
+
 JSON Response
+
 ```
 
 ---
@@ -177,7 +189,9 @@ JSON Response
 ## Manual
 
 ```
+
 GET /api/rate-limit/manual?clientId=alice
+
 ```
 
 ---
@@ -185,7 +199,9 @@ GET /api/rate-limit/manual?clientId=alice
 ## Bucket4j
 
 ```
+
 GET /api/rate-limit/bucket4j?clientId=alice
+
 ```
 
 ---
@@ -193,7 +209,9 @@ GET /api/rate-limit/bucket4j?clientId=alice
 ## Redis
 
 ```
+
 GET /api/rate-limit/redis?clientId=alice
+
 ```
 
 ---
@@ -214,7 +232,7 @@ GET /api/rate-limit/redis?clientId=alice
 # Comparison
 
 | Feature | Manual | Bucket4j | Redis |
-| --- | --- | --- | --- |
+|----------|---------|----------|-------|
 | Custom Algorithm | ✅ | ❌ | ❌ |
 | Easy to Understand | ✅ | ⚠️ | ⚠️ |
 | Thread Safe | Planned | ✅ | ✅ |
@@ -282,8 +300,11 @@ Example:
 
 ```bash
 git clone https://github.com/yourusername/rate-limiter-lab
+
 cd rate-limiter-lab
+
 mvn clean install
+
 mvn spring-boot:run
 ```
 
@@ -291,19 +312,19 @@ mvn spring-boot:run
 
 # Usage
 
-Manual limiter:
+Manual limiter
 
 ```
 GET http://localhost:8080/api/rate-limit/manual?clientId=alice
 ```
 
-Bucket4j limiter:
+Bucket4j limiter
 
 ```
 GET http://localhost:8080/api/rate-limit/bucket4j?clientId=alice
 ```
 
-Redis limiter:
+Redis limiter
 
 ```
 GET http://localhost:8080/api/rate-limit/redis?clientId=alice
@@ -325,3 +346,9 @@ This project demonstrates:
 - Redis Integration
 - Benchmarking Multiple Implementations
 - Backend System Design
+
+---
+
+# License
+
+MIT

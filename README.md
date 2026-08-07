@@ -51,23 +51,26 @@ This makes it possible to directly compare:
 # Architecture
 
 ```
-Client
-  │
-  ▼
-RateLimiterController
-  │
-  ▼
-RateLimiter Interface
-┌────────────┼────────────┐
-│            │            │
-▼            ▼            ▼
-Manual       Bucket4j     Redis
-  │            │            │
-  ▼            ▼            ▼
-ConcurrentMap Bucket4j     Redis
-  │            │            │
-  ▼            ▼            ▼
-RateLimitResult
+                           Client
+                              │
+                              ▼
+                 RateLimiterController
+                              │
+                              ▼
+                  RateLimiter Interface
+                              │
+        ┌─────────────────────┼─────────────────────┐
+        │                     │                     │
+        ▼                     ▼                     ▼
+ ManualTokenBucket      Bucket4jLimiter     RedisTokenBucket
+        │                     │                     │
+        ▼                     ▼                     ▼
+ ConcurrentHashMap      Bucket4j Library     Redis Server
+        │                     │                     │
+        └─────────────────────┼─────────────────────┘
+                              │
+                              ▼
+                    RateLimitResult (JSON)
 ```
 
 ---

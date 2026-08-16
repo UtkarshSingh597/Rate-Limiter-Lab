@@ -10,8 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BenchmarkResult {
-    private int capacity;
-    private int tokens;
-    private int refillRate;
-    private Long lastRefillTime;
+    private int requests;
+    private long manualTimeNs;
+    private long bucket4jTimeNs;
+    private long manualTimeAvgNs;
+    private long bucket4jTimeAvgNs;
 }

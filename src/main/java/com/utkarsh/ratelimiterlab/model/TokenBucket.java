@@ -5,11 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TokenBucket {
+public class TokenBucket implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int capacity;
     private int tokens;
     private int refillRate;

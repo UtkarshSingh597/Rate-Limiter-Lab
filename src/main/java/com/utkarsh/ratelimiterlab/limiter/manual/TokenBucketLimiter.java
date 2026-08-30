@@ -4,6 +4,7 @@ import com.utkarsh.ratelimiterlab.limiter.RateLimiter;
 import com.utkarsh.ratelimiterlab.model.RateLimitResult;
 import com.utkarsh.ratelimiterlab.model.TokenBucket;
 import com.utkarsh.ratelimiterlab.repository.BucketStore;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,7 +15,7 @@ public class TokenBucketLimiter implements RateLimiter {
     private final BucketStore bucketStore;
 
 
-    public TokenBucketLimiter(BucketStore bucketStore) {
+    public TokenBucketLimiter(@Qualifier("inMemoryBucketStore") BucketStore bucketStore) {
         this.bucketStore = bucketStore;
     }
 

@@ -8,6 +8,31 @@ A Spring Boot lab for comparing three token-bucket rate-limiting approaches thro
 
 Each limiter starts a new client with 10 tokens and refills one token per second. A permitted request consumes one token.
 
+## Architecture
+
+```
+                           Client
+                              │
+                              ▼
+                 RateLimiterController
+                              │
+                              ▼
+                  RateLimiter Interface
+                              │
+        ┌─────────────────────┼─────────────────────┐
+        │                     │                     │
+        ▼                     ▼                     ▼
+ ManualTokenBucket      Bucket4jLimiter     RedisTokenBucket
+        │                     │                     │
+        ▼                     ▼                     ▼
+ ConcurrentHashMap      Bucket4j Library     Redis Server
+        │                     │                     │
+        └─────────────────────┼─────────────────────┘
+                              │
+                              ▼
+                    RateLimitResult (JSON)
+```
+
 ## Implementations
 
 | Endpoint | Implementation | State location |
